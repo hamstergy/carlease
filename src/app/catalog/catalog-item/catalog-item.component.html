@@ -1,0 +1,27 @@
+<article>
+    <div *ngIf="index == 0 || index % 9 == 0; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+        <img class="item-image" src="../../../assets/images/polo.jpg" (alt)="index">
+        <div class="item-data">
+            <div class="title item-wide">{{item.make + ' ' + item.model}}</div>
+            <div class="text small">
+                <span>
+                {{ '$'+item.price }} per month
+                </span>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #elseBlock>
+        <img class="item-image" src="../../../assets/images/tahoe.jpg" (alt)="index">
+        <div class="item-data">
+            <div class="title">{{item.make + ' ' + item.model}}</div>
+            <div class="text small">
+                <span>
+                {{ '$'+item.price }} per month
+                </span>
+            </div>
+        </div>
+    </ng-template>
+
+</article>

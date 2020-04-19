@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import ~bootstrap/scss/bootstrap
+@import assets/styles/mixins
+
+.container
+  @include for-phone-only
+    max-width: 540px
+  @include for-tablet-portrait-up
+    max-width: 720px
+  @include for-tablet-landscape-up
+    max-width: 960px
+  @include for-desktop-up
+    max-width: 1184px
