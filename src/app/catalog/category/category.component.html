@@ -1,0 +1,28 @@
+<div *ngIf="!isLoadingResults">
+    <div *ngIf="items.length == 0; else resultBlock"><h2>No cars</h2></div>
+    <ng-template #resultBlock>
+        <h1>Best {{items[0].makeName}} lease deals in {{currentMonth}} {{currentYear}}</h1>
+        <div class="row">
+            <ng-container  *ngFor="let item of items; let i = index"
+            >
+                <div *ngIf="i % 18 === 0 && i != 0" class="col-lg-12 item-wide">
+                    <div style="background-color: #7c7c80; width:100%; min-height: 90px; margin: 0 0 10px">
+                        Adsense
+                    </div>
+                </div>
+                <app-catalog-item
+                        class="item"
+                        [index]=i
+                        [item]=item
+                        [ngClass]="{
+                    'col-lg-12 col-sm-12 col-md-12 item-wide': i == 0 || i % 9 == 0,
+                    'col-sm-6 col-md-3 col-lg-3': i != 0 || i % 9 != 0
+                }"
+                >
+                </app-catalog-item>
+            </ng-container>
+        </div>
+    </ng-template>
+</div>
+
+

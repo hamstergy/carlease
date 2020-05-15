@@ -1,27 +1,60 @@
 <article>
     <div *ngIf="index == 0 || index % 9 == 0; then thenBlock else elseBlock"></div>
     <ng-template #thenBlock>
-        <img class="item-image" src="../../../assets/images/polo.jpg" (alt)="index">
-        <div class="item-data">
-            <div class="title item-wide">{{item.make + ' ' + item.model}}</div>
-            <div class="text small">
-                <span>
-                {{ '$'+item.price }} per month
-                </span>
+        <div *ngIf="index == 0; then thenImg else elseImg"></div>
+        <ng-template #thenImg>
+            <div class="row m-0">
+                <div class="col-md-9 col-sm-12 p-0 pr-1">
+                    <picture>
+                    <source media="(min-width: 900px)" [srcset]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-medium.jpg'">
+                    <source media="(min-width: 600px)" [srcset]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-medium.jpg'">
+                    <img class="item-image" [src]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-mobile.jpg'" [alt]="item.makeName + ' ' + item.name">
+                    </picture>
+                    <div class="item-data">
+                        <div class="title item-wide">{{item.makeName + ' ' + item.name}}</div>
+                        <div class="text small">
+                            <span>
+                            {{ '$'+item.lease }} per month
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12 p-0 pl-2">Advert</div>
             </div>
-        </div>
+
+        </ng-template>
+        <ng-template #elseImg>
+            <picture>
+                <source media="(min-width: 900px)" [srcset]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-large.jpg'">
+                <source media="(min-width: 600px)" [srcset]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-medium.jpg'">
+                <img class="item-image" [src]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-mobile.jpg'" [alt]="item.makeName + ' ' + item.name">
+            </picture>
+            <div class="item-data">
+                <div class="title item-wide">{{item.makeName + ' ' + item.name}}</div>
+                <div class="text small">
+                <span>
+                {{ '$'+item.lease }} per month
+                </span>
+                </div>
+            </div>
+        </ng-template>
+
+
     </ng-template>
 
     <ng-template #elseBlock>
-        <img class="item-image" src="../../../assets/images/tahoe.jpg" (alt)="index">
+        <picture>
+            <source media="(min-width: 900px)" [srcset]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-mobile.jpg'">
+            <source media="(min-width: 600px)" [srcset]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-mobile.jpg'">
+            <img class="item-image" [src]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-mobile.jpg'" [alt]="item.makeName + ' ' + item.name">
+        </picture>
         <div class="item-data">
-            <div class="title">{{item.make + ' ' + item.model}}</div>
+            <div class="title">{{item.makeName + ' ' + item.name}}</div>
             <div class="text small">
                 <span>
-                {{ '$'+item.price }} per month
+                {{ '$'+item.lease }} per month
                 </span>
             </div>
         </div>
     </ng-template>
-
 </article>

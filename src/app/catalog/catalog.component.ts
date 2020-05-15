@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Car } from './car.model';
 
 @Component({
   selector: 'app-catalog',
@@ -7,71 +6,9 @@ import { Car } from './car.model';
   styleUrls: ['./catalog.component.sass']
 })
 export class CatalogComponent implements OnInit {
-  items: Car[] = [
-    {
-      make: 'Acura',
-      model: 'MDX',
-      price: 350
-    },
-    {
-      make: 'Audi',
-      model: 'a4',
-      price: 420
-    },
-    {
-      make: 'BMW',
-      model: 'M5',
-      price: 450
-    },
-    {
-      make: 'Mercedes',
-      model: 'M-class',
-      price: 499
-    },
-    {
-      make: 'Acura',
-      model: 'MDX',
-      price: 350
-    },
-    {
-      make: 'Audi',
-      model: 'a4',
-      price: 420
-    },
-    {
-      make: 'BMW',
-      model: 'M5',
-      price: 450
-    },
-    {
-      make: 'Mercedes',
-      model: 'M-class',
-      price: 499
-    },
-    {
-      make: 'Acura',
-      model: 'MDX',
-      price: 350
-    },
-    {
-      make: 'Audi',
-      model: 'a4',
-      price: 420
-    },
-    {
-      make: 'BMW',
-      model: 'M5',
-      price: 450
-    },
-    {
-      make: 'Mercedes',
-      model: 'M-class',
-      price: 499
-    },
-  ];
-  constructor() { }
+  constructor( ) { }
 
   ngOnInit(): void {
-  }
 
+  }
 }

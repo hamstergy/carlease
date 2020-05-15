@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CatalogService} from '../catalog/catalog.service';
 
 interface Price {
   text: string;
@@ -11,6 +12,7 @@ interface Segment {
 }
 interface Make {
   name: string;
+  slug: string;
 }
 @Component({
   selector: 'app-header',
@@ -19,24 +21,8 @@ interface Make {
 })
 
 export class HeaderComponent implements OnInit {
-  makes: Make[] = [
-    {name: 'Toyota'},
-    {name: 'Honda'},
-    {name: 'Ford'},
-    {name: 'Nissan'},
-    {name: 'Chevrolet'},
-    {name: 'Mercedes'},
-    {name: 'BMW'},
-    {name: 'Hyundai'},
-    {name: 'Kia'},
-    {name: 'Lexus'},
-    {name: 'Subaru'},
-    {name: 'Jeep'},
-    {name: 'Mazda'},
-    {name: 'Volkswagen'},
-    {name: 'Audi'},
-    {name: 'Dodge'}
-  ];
+  showMakeMenu: boolean = false;
+  makes: Make[] = [];
   prices: Price[] = [
       {
         text: '< $10K',
@@ -81,18 +67,13 @@ export class HeaderComponent implements OnInit {
     },
     {
       name: 'Truck',
-      slug: 'track',
-      url: 'track'
+      slug: 'truck',
+      url: 'truck'
     },
     {
       name: 'Coupe',
       slug: 'coupe',
       url: 'coupe'
-    },
-    {
-      name: 'Convertible',
-      slug: 'convertible',
-      url: 'convertible'
     },
     {
       name: 'Convertible',
@@ -116,9 +97,13 @@ export class HeaderComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor( private catalogService: CatalogService) { }
 
   ngOnInit(): void {
+    this.catalogService.getMakes().subscribe(
+        data => { this.makes = data; },
+        err => console.log(err)
+    );
   }
 
 }
