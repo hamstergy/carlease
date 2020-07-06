@@ -3,6 +3,7 @@ import { Car } from '../car.model';
 import {CatalogService} from '../catalog.service';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Subscription} from 'rxjs';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-category',
@@ -23,7 +24,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
     });
   }
   getAllCarsFromCategory(slug) {
-    this.catalogService.getModelsByMake(slug,'sedan').subscribe(
+    this.catalogService.getModelsByMake(slug).subscribe(
         data => {
           if (data.length > 0) {
             this.items = data;
@@ -36,7 +37,13 @@ export class CategoryComponent implements OnInit, OnDestroy {
         err => console.log(err)
     );
   }
+  get getSortingItems(): Car[] {
+    let boom = 'sedan';
+    return _.filter(this.items, {'className': boom});
+  }
+
   ngOnDestroy(): void {
     this.paramsSubscription.unsubscribe();
   }
+
 }

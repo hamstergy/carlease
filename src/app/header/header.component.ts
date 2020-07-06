@@ -106,5 +106,8 @@ export class HeaderComponent implements OnInit {
     );
   }
 
+  setClassNameHeader(className) {
+    this.catalogService.setClassName(className);
+  }
 }
 

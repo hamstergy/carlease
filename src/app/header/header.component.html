@@ -61,7 +61,7 @@
                         <!--<a class="p-2 text-muted" href="#">Manual</a>-->
                     <!--</div>-->
                     <div>
-                        <a class="p-2 text-muted" href="#" *ngFor="let segment of segments">{{segment.name}}</a>
+                        <a class="p-2 text-muted" *ngFor="let segment of segments" (click)="setClassNameHeader(segment.slug)">{{segment.name}}</a>
                     </div>
                 </nav>
             </div>

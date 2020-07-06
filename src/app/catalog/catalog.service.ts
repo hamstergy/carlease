@@ -9,28 +9,25 @@ import {Make} from './make.model';
 })
 export class CatalogService {
 
+  className = '';
+
   constructor(private http: HttpClient) { }
 
-  getAll() {
-    return this.http.get<Car[]>('http://carleaseback.test/api/allModels', {observe: 'body'}).pipe( map ( response => {
-      return response;
-    }));
+  setClassName(className) {
+    this.className = className;
+  }
+  getClassName() {
+    return this.className;
   }
   getMakes() {
     return this.http.get<Make[]>('http://carleaseback.test/api/allMakes', {observe: 'body'}).pipe( map ( response => {
       return response;
     }));
   }
-  getModelsByMake(slug: string, className: string) {
-    let params = new HttpParams();
-    if (className != '') {
-      params = params.set('class', className);
-    }
-    return this.http.get<Car[]>('http://carleaseback.test/api/getModels/byMake/' + slug, {params, observe: 'body'})
+  getModelsByMake(slug: string, ) {
+    return this.http.get<Car[]>('http://carleaseback.test/api/getModels/byMake/' + slug, {observe: 'body'})
         .pipe( map ( response => {
       return response;
     }));
   }
-
 }
-
