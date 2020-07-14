@@ -24,10 +24,10 @@ export class CatalogService {
       return response;
     }));
   }
-  getModelsByMake(slug: string, ) {
-    return this.http.get<Car[]>('http://carleaseback.test/api/getModels/byMake/' + slug, {observe: 'body'})
-        .pipe( map ( response => {
-      return response;
-    }));
-  }
+  // getModelsByMake(slug: string, ) {
+  //   return this.http.get<Car[]>('http://carleaseback.test/api/getModels/byMake/' + slug, {observe: 'body'})
+  //       .pipe( map ( response => {
+  //     return response;
+  //   }));
+  // }
 }

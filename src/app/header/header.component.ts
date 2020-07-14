@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {CatalogService} from '../catalog/catalog.service';
+import {Store} from '@ngrx/store';
+import * as fromApp from '../store/app.reducer';
+import {StoreFilterSegment} from './store/header.actions';
+import {map} from 'rxjs/operators';
 
 interface Price {
   text: string;
@@ -21,8 +25,9 @@ interface Make {
 })
 
 export class HeaderComponent implements OnInit {
-  showMakeMenu: boolean = false;
+  showMakeMenu = false;
   makes: Make[] = [];
+  selectedSegment = '';
   prices: Price[] = [
       {
         text: '< $10K',
@@ -97,13 +102,20 @@ export class HeaderComponent implements OnInit {
     },
   ];
 
-  constructor( private catalogService: CatalogService) { }
+  constructor( private catalogService: CatalogService, private store: Store<fromApp.AppState>) { }
 
   ngOnInit(): void {
     this.catalogService.getMakes().subscribe(
         data => { this.makes = data; },
         err => console.log(err)
     );
+    this.store.select('headerList').pipe(map(headerState => headerState.segment)).subscribe( (segment: string) => {
+      this.selectedSegment = segment;
+    });
+  }
+
+  setSegment(segment: string) {
+    this.store.dispatch(new StoreFilterSegment(segment));
   }
 
   setClassNameHeader(className) {

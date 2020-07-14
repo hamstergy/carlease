@@ -3,14 +3,12 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {HttpClient} from '@angular/common/http';
 
 import {map, catchError, switchMap} from 'rxjs/operators';
-import {of} from 'rxjs';
 import * as HomeActions from './home.actions';
-import {HomeService} from '../home.service';
 import {Car} from '../../catalog/car.model';
 
 @Injectable()
 export class HomeEffects {
-    constructor(private actions$: Actions, private http: HttpClient, private homeService: HomeService ) {}
+    constructor(private actions$: Actions, private http: HttpClient) {}
 
     @Effect()
     storeCars = this.actions$.pipe(

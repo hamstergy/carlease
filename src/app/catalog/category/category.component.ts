@@ -4,6 +4,10 @@ import {CatalogService} from '../catalog.service';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Subscription} from 'rxjs';
 import * as _ from 'lodash';
+import {Store} from '@ngrx/store';
+import * as fromApp from '../../store/app.reducer';
+import {map} from 'rxjs/operators';
+import * as CategoryActions from './store/category.actions';
 
 @Component({
   selector: 'app-category',
@@ -15,35 +19,37 @@ export class CategoryComponent implements OnInit, OnDestroy {
   currentMonth = new Date().toLocaleString('default', { month: 'long' });
   currentYear = new Date().toLocaleString('default', { year: 'numeric' });
   items: Car[] = [];
+  selectedSegment = '';
   paramsSubscription: Subscription;
-  constructor( private catalogService: CatalogService, private route: ActivatedRoute) { }
+  subscription: Subscription;
+  constructor( private catalogService: CatalogService, private route: ActivatedRoute, private store: Store<fromApp.AppState>) { }
 
   ngOnInit(): void {
-    this.paramsSubscription = this.route.params.subscribe( (params: Params) => {
-      this.getAllCarsFromCategory(params['slug']);
+    this.store.select('headerList').pipe(map(headerState => headerState.segment)).subscribe((segment: string) => {
+      this.selectedSegment = segment;
     });
+    this.paramsSubscription = this.route.params.subscribe( (params: Params) => {
+      this.store.dispatch(new CategoryActions.StoreCategoryCarsStart(params['slug']));
+    });
+    this.subscription = this.store.select('categoryList')
+        .pipe(map(categoryCarsState => categoryCarsState.categoryCars))
+        .subscribe((categoryCars: Car[]) => {
+          this.items = categoryCars;
+          this.isLoadingResults = false;
+        });
   }
-  getAllCarsFromCategory(slug) {
-    this.catalogService.getModelsByMake(slug).subscribe(
-        data => {
-          if (data.length > 0) {
-            this.items = data;
-            this.isLoadingResults = false;
-          } else {
-            this.items = [];
-            this.isLoadingResults = false;
-          }
-          },
-        err => console.log(err)
-    );
-  }
-  get getSortingItems(): Car[] {
-    let boom = 'sedan';
-    return _.filter(this.items, {'className': boom});
+
+  filteredList(): Car[] {
+    if (this.selectedSegment != null) {
+      return _.filter(this.items, {'className': this.selectedSegment});
+    } else {
+      return this.items;
+    }
   }
 
   ngOnDestroy(): void {
     this.paramsSubscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 }
