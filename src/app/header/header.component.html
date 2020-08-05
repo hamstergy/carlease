@@ -44,7 +44,7 @@
                        class="p-2 text-muted"
                        href="#"
                        *ngFor="let make of makes"
-                       [routerLink]="['make/'+make.slug]"
+                       [routerLink]="['cars/'+make.slug]"
                        >{{make.name}}</a>
                 </nav>
             </div>
@@ -54,7 +54,7 @@
                         Choose make
                     </button>
                     <div class="dropdown-menu" [ngClass]="{'show' : showMakeMenu}">
-                        <a class="dropdown-item" (click)="showMakeMenu = !showMakeMenu" *ngFor="let make of makes" [routerLink]="['make/'+make.slug]">{{make.name}}</a>
+                        <a class="dropdown-item" (click)="showMakeMenu = !showMakeMenu" *ngFor="let make of makes" [routerLink]="['cars/'+make.slug]">{{make.name}}</a>
                     </div>
                 </div>
             </div>

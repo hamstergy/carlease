@@ -1,41 +1,41 @@
-import { Car } from '../../car.model';
-import * as fromCategory from './category.actions';
+import {Car} from '../../car.model';
+import * as fromModel from './model.actions';
 
 export interface State {
-    categoryCars: Car[];
-    category: string;
+    make: string;
+    model: Car;
     loading: boolean;
     error: any;
 }
 
 const initialState: State = {
-    categoryCars: [],
-    category: 'Honda',
-    loading: false,
+    make: 'Toyota',
+    model: {},
+    loading: true,
     error: null
 };
 
-export function categoryReducer(
+export function ModelReducer(
     state: State = initialState,
-    action: fromCategory.CategoryActions
+    action: fromModel.ModelActions
 ) {
     switch (action.type) {
-        case fromCategory.STORE_CATEGORY_CARS_START: {
+        case fromModel.STORE_CAR_MODEL_START: {
             return {
                 ...state,
-                category: action.payload,
                 loading: true,
                 error: null
             };
         }
-        case fromCategory.STORE_CATEGORY_CAR_SUCCESS: {
+        case fromModel.STORE_CAR_MODEL_SUCCESS: {
             return {
                 ...state,
                 loading: false,
-                categoryCars: action.payload
+                model: action.payload.model,
+                make: action.payload.make
             };
         }
-        case fromCategory.STORE_CATEGORY_CARS_ERROR: {
+        case fromModel.STORE_CAR_MODEL_ERROR: {
             return {
                 ...state,
                 loading: false,

@@ -1,3 +1,4 @@
+
 <article>
     <div *ngIf="index == 0 || index % 9 == 0; then thenBlock else elseBlock"></div>
     <ng-template #thenBlock>
@@ -5,11 +6,11 @@
         <ng-template #thenImg>
             <div class="row m-0">
                 <div class="col-md-9 col-sm-12 p-0 pr-1">
-                    <picture>
+                    <a [routerLink]="['/cars/'+item.makeSlug+'/'+item.slug]"><picture>
                     <source media="(min-width: 900px)" [srcset]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-medium.jpg'">
                     <source media="(min-width: 600px)" [srcset]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-medium.jpg'">
                     <img class="item-image" [src]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-mobile.jpg'" [alt]="item.makeName + ' ' + item.name">
-                    </picture>
+                    </picture></a>
                     <div class="item-data">
                         <div class="title item-wide">{{item.makeName + ' ' + item.name}}</div>
                         <div class="text small">
@@ -24,11 +25,11 @@
 
         </ng-template>
         <ng-template #elseImg>
-            <picture>
+            <a [routerLink]="['/cars/'+item.makeSlug+'/'+item.slug]"><picture>
                 <source media="(min-width: 900px)" [srcset]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-large.jpg'">
                 <source media="(min-width: 600px)" [srcset]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-medium.jpg'">
                 <img class="item-image" [src]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-mobile.jpg'" [alt]="item.makeName + ' ' + item.name">
-            </picture>
+            </picture></a>
             <div class="item-data">
                 <div class="title item-wide">{{item.makeName + ' ' + item.name}}</div>
                 <div class="text small">
@@ -43,11 +44,12 @@
     </ng-template>
 
     <ng-template #elseBlock>
-        <picture>
+        <a [routerLink]="['/cars/'+item.makeSlug+'/'+item.slug]">
+            <picture>
             <source media="(min-width: 900px)" [srcset]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-mobile.jpg'">
             <source media="(min-width: 600px)" [srcset]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-mobile.jpg'">
             <img class="item-image" [src]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+item.makeSlug+'/'+item.makeSlug+'-'+item.slug+'-mobile.jpg'" [alt]="item.makeName + ' ' + item.name">
-        </picture>
+        </picture></a>
         <div class="item-data">
             <div class="title">{{item.makeName + ' ' + item.name}}</div>
             <div class="text small">

@@ -18,11 +18,13 @@ export class CategoryComponent implements OnInit, OnDestroy {
   isLoadingResults = true;
   currentMonth = new Date().toLocaleString('default', { month: 'long' });
   currentYear = new Date().toLocaleString('default', { year: 'numeric' });
+  activeRoute: string;
   items: Car[] = [];
   selectedSegment = '';
   paramsSubscription: Subscription;
   subscription: Subscription;
-  constructor( private catalogService: CatalogService, private route: ActivatedRoute, private store: Store<fromApp.AppState>) { }
+
+  constructor( private catalogService: CatalogService, private route: ActivatedRoute, private store: Store<fromApp.AppState>) {}
 
   ngOnInit(): void {
     this.store.select('headerList').pipe(map(headerState => headerState.segment)).subscribe((segment: string) => {
@@ -32,15 +34,16 @@ export class CategoryComponent implements OnInit, OnDestroy {
       this.store.dispatch(new CategoryActions.StoreCategoryCarsStart(params['slug']));
     });
     this.subscription = this.store.select('categoryList')
-        .pipe(map(categoryCarsState => categoryCarsState.categoryCars))
-        .subscribe((categoryCars: Car[]) => {
-          this.items = categoryCars;
-          this.isLoadingResults = false;
+        .pipe(map(categoryCarsState => categoryCarsState))
+        .subscribe((categoryData) => {
+          this.items = categoryData.categoryCars;
+          this.isLoadingResults = categoryData.loading;
         });
+    this.activeRoute = this.route.snapshot.data.stateName;
   }
 
   filteredList(): Car[] {
-    if (this.selectedSegment != null) {
+    if (this.selectedSegment) {
       return _.filter(this.items, {'className': this.selectedSegment});
     } else {
       return this.items;

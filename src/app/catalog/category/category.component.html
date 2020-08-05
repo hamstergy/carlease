@@ -1,4 +1,4 @@
-<div *ngIf="!isLoadingResults">
+<div *ngIf="!isLoadingResults; else loadingBlock">
     <div *ngIf="items.length == 0; else resultBlock"><h2>No cars</h2></div>
     <ng-template #resultBlock>
         <h1>Best {{items[0].makeName}} lease deals in {{currentMonth}} {{currentYear}}</h1>
@@ -24,5 +24,6 @@
         </div>
     </ng-template>
 </div>
-
-
+<ng-template #loadingBlock>
+    Loading...
+</ng-template>

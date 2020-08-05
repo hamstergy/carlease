@@ -115,7 +115,9 @@ export class HeaderComponent implements OnInit {
   }
 
   setSegment(segment: string) {
-    this.store.dispatch(new StoreFilterSegment(segment));
+    this.selectedSegment === segment
+        ? this.store.dispatch(new StoreFilterSegment(null))
+        : this.store.dispatch(new StoreFilterSegment(segment));
   }
 
   setClassNameHeader(className) {
