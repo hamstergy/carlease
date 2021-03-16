@@ -31,7 +31,8 @@ export class CategoryComponent implements OnInit, OnDestroy {
       this.selectedSegment = segment;
     });
     this.paramsSubscription = this.route.params.subscribe( (params: Params) => {
-      this.store.dispatch(new CategoryActions.StoreCategoryCarsStart(params['slug']));
+      const slug = 'slug';
+      this.store.dispatch(new CategoryActions.StoreCategoryCarsStart(params[slug]));
     });
     this.subscription = this.store.select('categoryList')
         .pipe(map(categoryCarsState => categoryCarsState))

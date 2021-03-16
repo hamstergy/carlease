@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {map, catchError, switchMap} from 'rxjs/operators';
 import * as HomeActions from './home.actions';
 import {Car} from '../../catalog/car.model';
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class HomeEffects {
@@ -14,7 +15,7 @@ export class HomeEffects {
     storeCars = this.actions$.pipe(
         ofType(HomeActions.STORE_CARS_START),
         switchMap(() => {
-            return this.http.get<Car[]>('http://carleaseback.test/api/allModels');
+            return this.http.get<Car[]>(environment.apiUrl + '/api/allModels');
         }),
         map(cars => {
             return new HomeActions.StoreCarsSuccess(cars);

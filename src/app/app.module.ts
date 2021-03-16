@@ -19,6 +19,7 @@ import { HomeEffects} from './home/store/home.effects';
 import { environment } from '../environments/environment';
 import {CategoryEffects} from './catalog/category/store/category.effects';
 import { ModelComponent } from './catalog/model/model.component';
+import {ModelEffects} from './catalog/model/store/model.effects';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { ModelComponent } from './catalog/model/model.component';
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([HomeEffects, CategoryEffects]),
+    EffectsModule.forRoot([HomeEffects, CategoryEffects, ModelEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],

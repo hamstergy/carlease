@@ -1,1 +1,72 @@
-<p>model works!</p>
+<article *ngIf="!isLoadingResults; else loadingBlock">
+    <div class="row model-page">
+        <picture class="col-12 p-0">
+            <source media="(min-width: 900px)"
+                    [srcset]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+make.toLowerCase()+'/'+make.toLowerCase()+'-'+item.slug+'-large.jpg'">
+            <source media="(min-width: 600px)" [srcset]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+make.toLowerCase()+'/'+make.toLowerCase()+'-'+item.slug+'-medium.jpg'">
+            <img class="item-image" [src]="'https://hamstercar.s3-us-west-2.amazonaws.com/images/'+make.toLowerCase()+'/'+make.toLowerCase()+'-'+item.slug+'-mobile.jpg'" [alt]="make + ' ' + item.name">
+        </picture>
+        <div class="col-12 pt-2 pb-4">
+            <div class="item-data">
+                <div class="title item-wide">{{make + ' ' + item.name}}</div>
+                <div class="text small">
+                    <span>
+                    {{ '$'+item.lease }} per month
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row deal">
+                <div class="col-md-4">
+                    <div class="p-3 deal-block">
+                        <div class="deal-title text-center">Lease<span>Lease Specials</span></div>
+                        <div class="deal-model">2021 Prius Prime LE</div>
+                        <ul class="deal-lease">
+                            <li>
+                                {{ '$'+item.lease }}
+                                <span>/ mo</span>
+                            </li>
+                            <li>
+                                36
+                                <span>mos</span>
+                            </li>
+                            <li>
+                                $1,999
+                                <span>due at signing</span>
+                            </li>
+                        </ul>
+                        <hr>
+                        <div class="deal-exp">Exp. 02/01/21</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 deal-block">
+                        <div class="deal-title text-center">APR<span>Finance Specials</span></div>
+                        <div class="deal-model">2021 Prius Prime LE</div>
+                        <ul class="deal-finance">
+                            <li>0%<span>APR.</span></li>
+                            <li>60<span>mos</span></li>
+                        </ul>
+                        <hr>
+                        <div class="deal-exp">Exp. 02/01/21</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 deal-block">
+                        <div class="deal-title text-center">Cash<span>Cash Back</span></div>
+                        <div class="deal-model">2021 Prius Prime LE</div>
+                        <ul class="deal-cash">
+                            <li>$3,000<span>Customer Cash</span></li>
+                        </ul>
+                        <hr>
+                        <div class="deal-exp">Exp. 02/01/21</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+<ng-template #loadingBlock>
+    Loading...
+</ng-template>

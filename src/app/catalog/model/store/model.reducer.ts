@@ -3,19 +3,19 @@ import * as fromModel from './model.actions';
 
 export interface State {
     make: string;
-    model: Car;
+    model: any;
     loading: boolean;
     error: any;
 }
 
 const initialState: State = {
     make: 'Toyota',
-    model: {},
+    model: null,
     loading: true,
     error: null
 };
 
-export function ModelReducer(
+export function modelReducer(
     state: State = initialState,
     action: fromModel.ModelActions
 ) {

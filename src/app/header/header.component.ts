@@ -120,6 +120,10 @@ export class HeaderComponent implements OnInit {
         : this.store.dispatch(new StoreFilterSegment(segment));
   }
 
+  toggleSearch() {
+    console.log('test');
+  }
+
   setClassNameHeader(className) {
     this.catalogService.setClassName(className);
   }
